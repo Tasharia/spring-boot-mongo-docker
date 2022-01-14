@@ -13,6 +13,20 @@ spec:
     type: RollingUpdate # bluegreen Canary deployement method 
     rollingUpdate:
       maxSurge: 1
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        app: huguette-dev
+    spec:
+      containers:
+      - name: huguette-dev
+        image: nginx # This image will be given by the company 
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 80 # This is the container port
+
 ---
 apiVersion: v1
 kind: Service # service manifest 
